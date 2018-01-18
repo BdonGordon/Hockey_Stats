@@ -1,0 +1,110 @@
+﻿<Page x:Class="Hockey_Stats.TeamPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hockey_Stats"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="545"
+      Title="TeamPage">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="EntryFieldStyle" TargetType="Grid">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0"/>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--From here to TextBox, that is how we make the textbox hint-->
+        
+        <TextBlock Margin="5,2" Text="Team Name" Grid.Row="0"
+                   Visibility="{Binding ElementName=teamName_Input,Path=Text.IsEmpty, 
+            Converter={StaticResource BooleanToVisibilityConverter}}"
+                    FontSize="20" Foreground="Gray"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Name="teamName_Input" Background="Transparent" Grid.Row="0"
+                    FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    MinWidth="105" BorderThickness="0"/>
+
+
+        <!--VerticalScrollBarVisibility="Auto" can be in scrollview after-->
+        <ScrollViewer Grid.Row="1"  CanContentScroll="True"
+                      PanningMode="VerticalOnly">
+            <Grid Name="Inner_Grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/> 
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>  <!--23-->
+                    <!--This will be for the submit and cancel-->
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!--Grid.Column=0 ... Name-->
+                    <ColumnDefinition Width="Auto"/>
+                    <!--Grid.Column=1 ... Number-->
+                    <ColumnDefinition Width="Auto"/>
+                    <!--Grid.Column=2 ... Position-->
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                
+
+                <!--Plus button. When this is pressed, columns will be created
+                right underneath -->
+                <Button Name="add_player_Text" Grid.Row="21" VerticalAlignment="Bottom"
+                        Background="Transparent"  BorderThickness="0" Click="add_player_Button_Click"
+                        Margin="5,2" HorizontalAlignment="Right" Padding="30,0">
+                    <TextBlock Text="+ Add Player">
+                        <TextBlock.TextEffects>
+                            <TextEffect PositionStart="0" PositionCount="1" Foreground="Green" />
+                        </TextBlock.TextEffects>
+                    </TextBlock>
+                </Button>
+                <Button Name="submit_button" Grid.Row="23" Click="submit_button_Click"
+                         VerticalAlignment="Bottom" Width="50">Save
+                </Button>
+                <Button Name="cancel_button" Grid.Row="23" Grid.Column="2" 
+                        VerticalAlignment="Bottom" Width="50" Click="cancel_button_Click" >
+                    Discard
+                </Button>
+              <!--  
+                <TextBox Grid.Row="19" Text="Hello" Name="myBox" Foreground="Gray" GotFocus="myBox_GotFocus" 
+                         ></TextBox> 
+                -->
+            </Grid>
+        </ScrollViewer>
+        <Frame x:Name="TeamFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
+
+</Page>

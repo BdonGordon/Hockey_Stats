@@ -1,0 +1,53 @@
+﻿<Window x:Class="Hockey_Stats.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hockey_Stats"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Grid >
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Wrap Panel to have the basic main menu-->
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center">
+
+            <TextBlock Text="Hockey Stats App"
+                       Padding="10">
+                <TextBlock.Style>
+                    <Style>
+                        <Setter Property="TextBlock.FontSize" Value="36"/>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <Button Name="createTeam_button" BorderThickness="0" 
+                    Background="White" HorizontalAlignment="Center"
+                    FontSize="16" FontWeight="Bold"
+                    Padding="5" Click="createTeam_button_Click">
+                Manage Team
+            </Button>
+            <Button Name="gameStart_button" BorderThickness="0" 
+                    Background="White" HorizontalAlignment="Center"
+                    FontSize="16" FontWeight="Bold"
+                    Click="gameStart_button_Click">
+                Game Start
+            </Button>
+
+            <!--
+            <local:TeamCreate x:Name="TeamCreate_Control" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            -->
+        </WrapPanel>
+        
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        
+    </Grid>
+</Window>

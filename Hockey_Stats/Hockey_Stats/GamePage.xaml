@@ -1,0 +1,184 @@
+﻿<Page x:Class="Hockey_Stats.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hockey_Stats"
+      mc:Ignorable="d" 
+      d:DesignHeight="385" d:DesignWidth="525"
+      Title="GamePage">
+
+    <!--d:DesignHeight="385" d:DesignWidth="545"-->
+
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Name="generals_Section">
+            <Grid.RowDefinitions>
+                <!--First row has the period number, scores, and play/pause button-->
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.2*"/>
+                <!--Players on the ice-->
+                <RowDefinition Height="0.4*"/>
+                <!--Statistics buttons-->
+                <RowDefinition/>
+                <!--Benched players-->
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Name="info_Section"  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center"
+                        >
+                <Label Name="period_Number" Content="Period 1" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="0,0,25,0"/>
+                <Label Name="clock_Label" Content="00:00" VerticalAlignment="Center" Margin="0,0,25,0"/>
+                <!--Play first then pause? -->
+                <Button Name="pause_play_Button" Content="Play" VerticalAlignment="Center" Click="pause_play_Button_Click"/>
+            </StackPanel>
+
+            <WrapPanel Name="score_Section" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Height="Auto">
+                <Label Name="my_Score" Content="0" FontWeight="Bold" Foreground="Blue" VerticalAlignment="Center"/>
+                <Label Content=":"  FontWeight="DemiBold" VerticalAlignment="Center"/>
+                <Label Name="opponent_Score" Content="0" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center"/>
+            </WrapPanel>
+
+            <Grid Name="ice_Section" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Name="position_Labels" Grid.Row="0" Orientation="Horizontal"
+                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-2">
+                    <Label Content="LW" Margin="0,0,25,0"/>
+                    <Label Content="LD" Margin="0,0,25,0"/>
+                    <Label Content="C" Margin="0,0,25,0"/>
+                    <Label Content="RD" Margin="0,0,25,0"/>
+                    <Label Content="RW"/>
+                </StackPanel>
+
+                <StackPanel Name="position_Buttons" Grid.Row="1" Orientation="Horizontal"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Margin="-1,0,0,0">
+                    <!--Create button that looks like pucks in THIS stackpanel. Any button created will look
+                    like this-->
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="MinWidth" Value="28"/>
+                            <Setter Property="MaxWidth" Value="25"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse Height="28" Width="28" Fill="Black"/>
+                                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Button Name="left_wing_Button" Content="12"  Margin="0,0,20,0" Click="left_wing_Button_Click" />
+                    <Button Name="left_defense_Button" Content="32"   Margin="0,0,20,0" />
+                    <Button Name="center_Button" Content="28"  Margin="0,0,20,0" />
+                    <Button Name="right_defense_Button"   Content="74" Margin="0,0,20,0" />
+                    <Button Name="right_wing_Button"  Content="54" />
+                </StackPanel>
+            </Grid>
+
+            <Grid Name="stats_Section" Grid.Row="3" Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="MinWidth" Value="45" />
+                        <Setter Property="MaxWidth" Value="45"/>
+                        <Setter Property="Background" Value="Red" />
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border BorderThickness="0">
+                                        <Border BorderThickness="0" Background="{TemplateBinding Background}"
+                                                CornerRadius="4">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="G/A" FontSize="10" FontWeight="Bold"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="SHF" FontSize="10" FontWeight="Bold"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="SHA" FontSize="10" FontWeight="Bold"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="T/G/H" FontSize="10" FontWeight="Bold"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="FO" FontSize="10" FontWeight="Bold"/>
+
+                <Button Name="goal_Button"  Grid.Row="0" Grid.Column="2" Content="Goal" />
+                <Button Name="pm_Button"  Grid.Row="0" Grid.Column="3" Content="PM" />
+
+                <!--My team shots for-->
+                <Button Name="shots_Taken_Button" Grid.Row="1" Grid.Column="1" Content="SH" />
+                <Button Name="shots_Blocked_Button" Grid.Row="1" Grid.Column="2" Content="SHB" />
+                <Button Name="shots_Missed_Button" Grid.Row="1" Grid.Column="3" Content="SHM" />
+                <!--Opposing teams shots against-->
+                <Button Name="opp_shots_Against_Button" Grid.Row="2" Grid.Column="1" Content="SHA" />
+                <Button Name="opp_shots_Blocked_Button" Grid.Row="2" Grid.Column="2" Content="SHB" />
+                <Button Name="opp_shots_Missed_Button" Grid.Row="2" Grid.Column="3" Content="SHM" />
+                <!--T/G/H-->
+                <Button Name="t_stats_Button" Grid.Row="3" Grid.Column="1" Content="T" />
+                <Button Name="g_stats_Button" Grid.Row="3" Grid.Column="2" Content="G" />
+                <Button Name="h_stats_Button" Grid.Row="3" Grid.Column="3" Content="H" />
+                <!--Faceoff-->
+                <Button Name="face_Win_Button" Grid.Row="4" Grid.Column="1" Content="FW" />
+                <Button Name="face_Loss_Button" Grid.Row="4" Grid.Column="2" Content="FL" />
+            </Grid>
+
+            <!--This grid gets filled in dynamically based on the number of players
+            found in the team roster. Populate row first then go into nex t column.
+            Goalies will have a G beside their jersey numbers (ie. G52, G75)-->
+            <Grid Name="bench_Section" Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="bench_position_1" Grid.Row="0" Grid.Column="0" Content="3" Click="bench_position_1_Click"/>
+                <Button Name="bench_position_2" Grid.Row="0" Grid.Column="1" Content="8" Click="bench_position_2_Click"/>
+            </Grid>
+        </Grid>
+    
+    </Grid>
+</Page>
